@@ -61,25 +61,37 @@ const Hero = () => {
           </form>
         </div>
       </div>
-      <div>
-        <div>
-          <h1>Books</h1>
+      <div className="container mt-5">
+        <div className=" d-flex justify-content-center">
+          <h1 className=" text-center">Books</h1>
         </div>
+        <hr className="p-2" />
+        {/* Card  */}
+
         <div>
-          {response.docs
-            ? response.docs.map((book, i) => (
-                <div key={i} className="d-flex justify-content-center">
-                  <div className="card  m-2" style={{ width: "18rem" }}>
-                    <h5 className="card-title">{book.title}</h5>
-                    <p className="card-text">Author name</p>
+          <div className="row row-cols-2 row-cols-md-3">
+            {loading === true ? (
+              <div
+                className="spinner-border text-success d-flex m-auto"
+                role="status"
+              >
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            ) : (
+              response.docs?.map((book, i) => (
+                //book output
+                <div key={i} className="col mb-4">
+                  <div className="card">
+                    <img src="..." className="card-img-top" alt="..." />
+                    <div className="card-body">
+                      <h5 className="card-title">{book.title}</h5>
+                      <p className="card-text">Some content here.</p>
+                    </div>
                   </div>
                 </div>
               ))
-            : { loading }(
-                <div className="spinner-border text-success" role="status">
-                  <span className="visually-hidden">Loading...</span>
-                </div>
-              )}
+            )}
+          </div>
         </div>
       </div>
     </>
