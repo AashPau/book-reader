@@ -8,6 +8,7 @@ const initialState = {
 const Hero = () => {
   const [form, setForm] = useState(initialState);
   const [response, setResponse] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -16,6 +17,7 @@ const Hero = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     getBooks(form.bookName);
     // if (result.status === "success") {
     //   setForm(initialState);
@@ -28,6 +30,7 @@ const Hero = () => {
   const getBooks = async (str) => {
     const book = await fetchFromAPI(str);
     setResponse(book);
+    setLoading(false);
   };
 
   return (
@@ -63,12 +66,20 @@ const Hero = () => {
           <h1>Books</h1>
         </div>
         <div>
-          {response.docs?.map((book, i) => (
-            <div className="card" style={{ width: "18rem" }} key={i}>
-              <h5 className="card-title">{book.title}</h5>
-              <p className="card-text">Author name</p>
-            </div>
-          ))}
+          {response.docs
+            ? response.docs.map((book, i) => (
+                <div key={i} className="d-flex justify-content-center">
+                  <div className="card  m-2" style={{ width: "18rem" }}>
+                    <h5 className="card-title">{book.title}</h5>
+                    <p className="card-text">Author name</p>
+                  </div>
+                </div>
+              ))
+            : { loading }(
+                <div className="spinner-border text-success" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              )}
         </div>
       </div>
     </>
