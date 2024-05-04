@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchFromAPI } from "../handler/axiosHandler";
+import { randomChar } from "../../util/random_char";
 
 const initialState = {
   bookName: "",
@@ -28,10 +29,15 @@ const Hero = () => {
   };
 
   const getBooks = async (str) => {
-    const book = await fetchFromAPI(str);
-    setResponse(book);
+    const books = await fetchFromAPI(str);
+    setResponse(books);
     setLoading(false);
   };
+  //useEffect to search random movie when page is refreshed
+  useEffect(() => {
+    const c = randomChar();
+    getBooks(c);
+  }, []);
 
   return (
     <>
@@ -82,10 +88,18 @@ const Hero = () => {
                 //book output
                 <div key={i} className="col mb-4">
                   <div className="card">
-                    <img src="..." className="card-img-top" alt="..." />
+                    <img
+                      src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
+                      className="card-img-top img-fluid"
+                      alt="..."
+                    />
                     <div className="card-body">
+                      {console.log(book)}
                       <h5 className="card-title">{book.title}</h5>
-                      <p className="card-text">Some content here.</p>
+                      <p className="card-text">
+                        {/* book.author_name returns arry so check and convert to string  */}
+                        {book.author_name?.toString()}
+                      </p>
                     </div>
                   </div>
                 </div>
