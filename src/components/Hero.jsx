@@ -41,9 +41,9 @@ const Hero = () => {
   }, []);
 
   return (
-    <>
+    <div className="bg-secondary">
       {/* search bar */}
-      <div className="d-flex flex-column text-center align-items-center justify-content-center mt-3 p-2">
+      <div className="d-flex flex-column text-center align-items-center justify-content-center p-2">
         <h1>Search for books</h1>
         <div className="mt-5">
           <form className="row g-3" onSubmit={handleOnSubmit}>
@@ -71,7 +71,7 @@ const Hero = () => {
       </div>
       <div className="container mt-5">
         <div className=" d-flex justify-content-center">
-          <h1 className=" text-center">Books</h1>
+          <h2 className=" text-center">Books</h2>
         </div>
         <hr className="p-2" />
         {/* Card  */}
@@ -110,7 +110,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
