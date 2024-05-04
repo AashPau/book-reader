@@ -32,6 +32,7 @@ const Hero = () => {
     const books = await fetchFromAPI(str);
     setResponse(books);
     setLoading(false);
+    books?.num_found > 0 ? setForm(initialState) : null;
   };
   //useEffect to search random movie when page is refreshed
   useEffect(() => {
@@ -41,6 +42,7 @@ const Hero = () => {
 
   return (
     <>
+      {/* search bar */}
       <div className="d-flex flex-column text-center align-items-center justify-content-center mt-3 p-2">
         <h1>Search for books</h1>
         <div className="mt-5">
@@ -56,7 +58,7 @@ const Hero = () => {
                 placeholder="The Great Gatsby"
                 name="bookName"
                 onChange={handleOnChange}
-                // value={form.bookName}
+                value={form.bookName}
               />
             </div>
             <div className="col-auto">
@@ -94,7 +96,7 @@ const Hero = () => {
                       alt="..."
                     />
                     <div className="card-body">
-                      {console.log(book)}
+                      {/* {console.log(book)} */}
                       <h5 className="card-title">{book.title}</h5>
                       <p className="card-text">
                         {/* book.author_name returns arry so check and convert to string  */}
