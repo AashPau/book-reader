@@ -41,7 +41,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="bg-secondary">
+    <div>
       {/* search bar */}
       <div className="d-flex flex-column text-center align-items-center justify-content-center p-2">
         <h1>Search for books</h1>
@@ -73,6 +73,7 @@ const Hero = () => {
         <div className=" d-flex justify-content-center">
           <h2 className=" text-center">Books</h2>
         </div>
+        {form.bookName ? <p>Search results for: {form.bookName}</p> : null}
         <hr className="p-2" />
         {/* Card  */}
 
